@@ -1,10 +1,8 @@
-﻿namespace TaskManagement.Enums
+﻿namespace BlogApplication.Enums
 {
     public enum Status
     {
-        InProgress = 1,
-        Due,
-        Done
+        Published,Draft
 
     }
 }

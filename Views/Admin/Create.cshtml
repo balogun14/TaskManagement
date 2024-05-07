@@ -1,0 +1,21 @@
+@model BlogApplication.ViewModels.BlogViewModel.CreateBlogViewModel
+
+@{
+    ViewData["Title"] = "Create New Post";
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for='Name' type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label asp-for="Body" class="form-label"></label>
+        <textarea id="" cols="30" rows="10" asp-for="Body"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label"></label>
+        <option value=""></option>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
