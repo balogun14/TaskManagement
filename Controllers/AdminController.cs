@@ -10,37 +10,67 @@ namespace BlogApplication;
 public class AdminController : Controller
 {
     private readonly IAdmin _admin;
-            private readonly INotyfService _notyfService;
+    private readonly INotyfService _notyfService;
 
-    public AdminController(IAdmin admin,INotyfService notyfService)
+    public AdminController(IAdmin admin, INotyfService notyfService)
     {
         this._admin = admin;
         this._notyfService = notyfService;
     }
-
-[HttpGet]
-public IActionResult Create(){
-    return View();
-}
-[HttpPost]
-public async Task<IActionResult> Create(CreateBlogViewModel model){
-    await _admin.Create(model);
-    return RedirectToAction("Index","home");
-}
-[HttpGet]
-public IActionResult Edit(){
-    return View();
-}
-[HttpPost]
-public async Task<IActionResult> Edit(EditBlogViewModel model){
-    var result = await _admin.Update(model);
-    if(result == true){
-_notyfService.Success("Edited Succesfully");
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        var allPosts = await _admin.GetAll();
+        return View(allPosts);
     }
-    else{
-        _notyfService.Warning("An error Occured");
 
+    [HttpGet]
+    public IActionResult Create()
+    {
+        return View();
     }
-    return View();
-}
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateBlogViewModel model)
+    {
+        await _admin.Create(model);
+        return RedirectToAction("Index", "home");
+    }
+    [HttpGet]
+    public IActionResult Edit()
+    {
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> Edit(EditBlogViewModel model)
+    {
+        var result = await _admin.Update(model);
+        if (result == true)
+        {
+            _notyfService.Success("Edited Succesfully");
+        }
+        else
+        {
+            _notyfService.Warning("An error Occured");
+        }
+        return View();
+    }
+    [HttpGet]
+    public IActionResult Delete()
+    {
+        return View();
+    }
+    [HttpPost]
+    public async Task<IActionResult> Delete(DeleteBlogViewModel model)
+    {
+        var result = await _admin.Delete(model.Id);
+        if (result == true)
+        {
+            _notyfService.Success("Deleted Succesfully");
+        }
+        else
+        {
+            _notyfService.Warning("An error Occured");
+        }
+        return View();
+    }
 }

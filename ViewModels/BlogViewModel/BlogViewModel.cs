@@ -12,7 +12,7 @@ namespace BlogApplication.ViewModels.BlogViewModel
         public required string  Body { get; set; }
         [DisplayName("Date Published")]
         public DateTime dateTime { get; set; }
-        [DisplayName("writer")]
+        [DisplayName("Written By")]
         public required string AuthorName { get; set; }
     }
 }
